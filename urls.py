@@ -1,0 +1,44 @@
+base_url1='https://www.oddsportal.com/soccer/'
+base_url2='https://sports.williamhill.com/betting/en-gb/football/competitions/'
+url_list=[
+{'url1':base_url1+'italy/serie-a/'
+ ,'url2':base_url2+'OB_TY321/Italian-Serie-A/matches/OB_MGMB/Match-Betting'}
+,{'url1':base_url1+'italy/serie-b/'
+ ,'url2':base_url2+'OB_TY23532/Italian-Serie-B/matches/OB_MGMB/Match-Betting'}
+,{'url1':base_url1+'england/premier-league/'
+ ,'url2':base_url2+'OB_TY295/English-Premier-League/matches/OB_MGMB/Match-Betting'}
+,{'url1':base_url1+'england/league-one/'
+ ,'url2':base_url2+'OB_TY293/English-League-1/matches/OB_MGMB/Match-Betting'}
+,{'url1':base_url1+'england/league-two/'
+ ,'url2':base_url2+'OB_TY294/English-League-2/matches/OB_MGMB/Match-Betting'}
+,{'url1':base_url1+'england/championship/'
+ ,'url2':base_url2+'OB_TY292/English-Championship/matches/OB_MGMB/Match-Betting'}
+,{'url1':base_url1+'scotland/premiership/'
+ ,'url2':base_url2+'OB_TY297/Scottish-Premiership/matches/OB_MGMB/Match-Betting'}
+,{'url1':base_url1+'scotland/championship/'
+ ,'url2':base_url2+'OB_TY2/Scottish-Championship/matches/OB_MGMB/Match-Betting'}  
+,{'url1':base_url1+'spain/laliga/'
+ ,'url2':base_url2+'OB_TY338/Spanish-La-Liga-Primera/matches/OB_MGMB/Match-Betting'}
+,{'url1':base_url1+'spain/laliga2/'
+ ,'url2':base_url2+'OB_TY32982/Spanish-Segunda/matches/OB_MGMB/Match-Betting'}
+,{'url1':base_url1+'germany/bundesliga/'
+ ,'url2':base_url2+'OB_TY315/German-Bundesliga/matches/OB_MGMB/Match-Betting'}
+,{'url1':base_url1+'germany/2-bundesliga/'
+ ,'url2':base_url2+'OB_TY317/German-Bundesliga-2/matches/OB_MGMB/Match-Betting'}
+,{'url1':base_url1+'portugal/primeira-liga/'
+,'url2':base_url2+'OB_TY331/Portuguese-Primeira-Liga/matches/OB_MGMB/Match-Betting'}    
+,{'url1':base_url1+'france/ligue-2/'
+,'url2':base_url2+'OB_TY314/French-Ligue-2/matches/OB_MGMB/Match-Betting'}  
+,{'url1':base_url1+'france/ligue-1/'
+ ,'url2':base_url2+'OB_TY312/French-Ligue-1/matches/OB_MGMB/Match-Betting'}   
+,{'url1':base_url1+'turkey/super-lig/'
+ ,'url2':base_url2+'OB_TY325/Turkish-Super-Lig/matches/OB_MGMB/Match-Betting'}   
+,{'url1':base_url1+'greece/super-league/'
+ ,'url2':base_url2+'OB_TY318/Greek-Super-League/matches/OB_MGMB/Match-Betting'}  
+,{'url1':base_url1+'australia/a-league/'
+ ,'url2':base_url2+'OB_TY3371/Australian-A-League/matches/OB_MGMB/Match-Betting'} 
+  ,{'url1':base_url1+'algeria/ligue-1/'
+ ,'url2':base_url2+'OB_TY8142/Algerian-Ligue-1/matches/OB_MGMB/Match-Betting'} 
+  ,{'url1':base_url1+'malta/premier-league/'
+ ,'url2':base_url2+'OB_TY3218/Malta-Premier-League/matches/OB_MGMB/Match-Betting'}    
+] 
