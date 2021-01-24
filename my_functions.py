@@ -22,8 +22,8 @@ def month_string_to_number(string):
         
 def get_page_source(page_url):        
     from selenium import webdriver      
-    webdriver_path = r'/usr/bin/chromedriver' #linux
-    #webdriver_path = r'C:\Users\emanu\Downloads\chromedriver_win32\chromedriver.exe' #windows   
+    #webdriver_path = r'/usr/bin/chromedriver' #linux
+    webdriver_path = r'C:\Users\admin\Documents\chromedriver\chromedriver.exe' #windows   
     chromeOptions = webdriver.ChromeOptions()
     chromeOptions.add_argument("--headless")
     chromeOptions.add_argument("--remote-debugging-port=9222")
@@ -33,14 +33,13 @@ def get_page_source(page_url):
     # get page source code
     return browser.page_source
 
-def future_matches(url1,bet_url):    
+def get_league_matches(league_id,future_matches_url,time_flag):    
     from bs4 import BeautifulSoup
     from datetime import datetime, timedelta
-    standing_url=url1+'standings/'
-    words=url1.split("/")
+    words=future_matches_url.split("/")
     country=words[4]
     league=words[5]
-    page_source = get_page_source(url1)
+    page_source = get_page_source(future_matches_url)
     soup = BeautifulSoup(page_source, 'html.parser')
     fixres_body = soup.findAll('table', {'id': 'tournamentTable'})
     soup1 = BeautifulSoup(str(fixres_body), 'html.parser')
@@ -72,14 +71,14 @@ def future_matches(url1,bet_url):
                 match_day=match_date[0:2] 
                 match_month=month_string_to_number(match_date[3:6])
                 match_year=match_date[7:11] 
-                match_date1=match_day+'-'+match_month+'-'+match_year
+                match_date1=match_year +'-'+match_month +'-' + match_day
                 
                 if match_date.find('Today')==0:
-                    match_date1 = today.strftime("%d-%m-%Y")
+                    match_date1 = today.strftime("%Y-%m-%d")
                 if match_date.find('Yesterday')==0:
-                    match_date1 = yesterday.strftime("%d-%m-%Y")
+                    match_date1 = yesterday.strftime("%Y-%m-%d")
                 if match_date.find('Tomorrow')==0:
-                    match_date1 = tomorrow.strftime("%d-%m-%Y")
+                    match_date1 = tomorrow.strftime("%Y-%m-%d")
                 match_date=match_date1
 
             if  'table-time' in tag.get('class'):
@@ -89,11 +88,12 @@ def future_matches(url1,bet_url):
                 match_participant=tag.text.strip()
                 h_team=match_participant.split(' - ')[0]
                 a_team=match_participant.split(' - ')[1]
-
-            #if  'table-score' in tag.get('class'):
-            #    match_score=tag.text.strip()
-            #   h_goals=match_score.split(':')[0]
-            #   a_goals=match_score.split(':')[1]
+            
+            if time_flag=='past':                
+                if  'table-score' in tag.get('class'):                
+                    match_score=tag.text.strip()
+                    h_goals=match_score.split(':')[0]
+                    a_goals=match_score.split(':')[1]
 
             if  'odds-nowrp' in tag.get('class'):
                 if i== 1:
@@ -125,6 +125,7 @@ def future_matches(url1,bet_url):
 
                     match_dict = {}                
                     for variable in [
+                        "league_id",
                         "country",
                         "league",                        
                         "match_date",                       
@@ -143,11 +144,29 @@ def future_matches(url1,bet_url):
                         "odd2p",                   
                         "oddtp",
                         "maxoddp",
-                        "maxoddout",
-                        "bet_url",                       
-                        "standing_url"
+                        "maxoddout"                   
+                       
                     ]:
                         match_dict[variable] = eval(variable)                
                     odd_list.append(match_dict)                
                 i = [1,i+1][i<3]        
-    return odd_list                 
+    return odd_list
+
+def run_mysql_sql(sql, action, hostname, username, password, database):
+    import mysql.connector
+    try:
+        mySqlConnection = mysql.connector.connect(
+            host=hostname, user=username, passwd=password, db=database, connect_timeout=1000)
+        mysqlcursor = mySqlConnection.cursor()
+        mysqlcursor.execute(sql)
+        if action == 's':
+            result = mysqlcursor.fetchall()
+            mySqlConnection.commit()
+            mySqlConnection.close()
+            return result
+        else:
+            mySqlConnection.commit()
+            mySqlConnection.close()
+            return 0
+    except:
+        return -1
